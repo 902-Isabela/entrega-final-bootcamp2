@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>web</title>
+    <link rel="manifest" href="/manifest.webmanifest">
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <!-- ✅ Apenas esta linha -->
+    <script type="module" src="/src/main.js"></script>
+
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/service-worker.js')
+            .then(reg => console.log('SW registrado com sucesso:', reg.scope))
+            .catch(err => console.log('Falha no registro do SW:', err));
+        });
+      }
+    </script>
+
+    <h1>Busca CEP - PWA</h1>
+    <p>Status da API: <span id="api-status">Testando...</span></p>
+    <div id="app">
+      <input type="text" id="cep-input" placeholder="Digite o CEP (apenas números)">
+      <button id="buscar-btn">Buscar Endereço</button>
+      <div id="resultado"></div>
+    </div>
+  </body>
+</html>
